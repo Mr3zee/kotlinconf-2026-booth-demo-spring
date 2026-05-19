@@ -1,0 +1,40 @@
+HELP.md
+target/
+build/
+.gradle/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac ###
+.DS_Store
+
+### Demonstrator-only content (scripts, prompts, cheatsheets, runtime artifacts) ###
+.demo/
+.junie/
+.claude-trace/
+*.log
