@@ -28,11 +28,11 @@ class OwnerMapper(private val petMapper: PetMapper) {
     }
 
     fun updateEntity(owner: Owner, form: OwnerForm) {
-        owner.firstName = form.firstName
-        owner.lastName = form.lastName
-        owner.address = form.address
-        owner.city = form.city
-        owner.telephone = form.telephone
+        owner.firstName = form.firstName ?: ""
+        owner.lastName = form.lastName ?: ""
+        owner.address = form.address ?: ""
+        owner.city = form.city ?: ""
+        owner.telephone = form.telephone ?: ""
     }
 
     fun toEntity(form: OwnerForm): Owner {

@@ -76,8 +76,8 @@ internal open class ClinicServiceTests {
         val owner = optionalOwner.get()
         assertThat(owner.lastName).startsWith("Franklin")
         assertThat(owner.pets).hasSize(1)
-        assertThat(owner.pets[0].type).isNotNull
-        assertThat(owner.pets[0].type.name).isEqualTo("cat")
+        val type = checkNotNull(owner.pets[0].type)
+        assertThat(type.name).isEqualTo("cat")
     }
 
     @Test
@@ -152,7 +152,7 @@ internal open class ClinicServiceTests {
         owner6 = optionalOwner.get()
         assertThat(owner6.pets).hasSize(found + 1)
         // checks that id has been generated
-        pet = owner6.getPet("bowser")!!
+        pet = checkNotNull(owner6.getPet("bowser"))
         assertThat(pet.id).isNotNull
     }
 
@@ -163,7 +163,7 @@ internal open class ClinicServiceTests {
         assertThat(optionalOwner).isPresent
         var owner6 = optionalOwner.get()
 
-        var pet7 = owner6.getPet(7)
+        var pet7 = checkNotNull(owner6.getPet(7))
         val oldName = pet7.name
 
         val newName = oldName + "X"
@@ -173,7 +173,7 @@ internal open class ClinicServiceTests {
         optionalOwner = owners.findById(6)
         assertThat(optionalOwner).isPresent
         owner6 = optionalOwner.get()
-        pet7 = owner6.getPet(7)
+        pet7 = checkNotNull(owner6.getPet(7))
         assertThat(pet7.name).isEqualTo(newName)
     }
 
@@ -195,7 +195,7 @@ internal open class ClinicServiceTests {
         assertThat(optionalOwner).isPresent
         val owner6 = optionalOwner.get()
 
-        val pet7 = owner6.getPet(7)
+        val pet7 = checkNotNull(owner6.getPet(7))
         val found = pet7.visits.size
         val visit = Visit()
         visit.description = "test"
@@ -214,13 +214,13 @@ internal open class ClinicServiceTests {
         assertThat(optionalOwner).isPresent
         val owner6 = optionalOwner.get()
 
-        val pet7 = owner6.getPet(7)
+        val pet7 = checkNotNull(owner6.getPet(7))
         val visits = pet7.visits
 
         assertThat(visits)
             .hasSize(2)
             .element(0)
-            .extracting(Visit::getDate)
+            .extracting(Visit::date)
             .isNotNull
     }
 }

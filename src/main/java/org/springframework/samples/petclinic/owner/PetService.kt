@@ -21,7 +21,6 @@ import org.springframework.samples.petclinic.util.OwnerMapper
 import org.springframework.samples.petclinic.util.PetMapper
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.util.Assert
 
 @Service
 class PetService(
@@ -67,9 +66,8 @@ class PetService(
     @Transactional
     fun update(ownerId: Int, petId: Int, form: PetForm) {
         val owner = loadOwner(ownerId)
-        val existing = owner.getPet(petId)
-        Assert.state(existing != null, "Pet not found on owner for id=$petId")
-        petMapper.updateEntity(existing!!, form)
+        val existing = checkNotNull(owner.getPet(petId)) { "Pet not found on owner for id=$petId" }
+        petMapper.updateEntity(existing, form)
         owners.save(owner)
     }
 

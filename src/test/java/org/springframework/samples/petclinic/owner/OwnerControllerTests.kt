@@ -100,7 +100,8 @@ internal class OwnerControllerTests {
         val visit = Visit()
         visit.id = 1
         visit.date = LocalDate.now()
-        george.getPet("Max")!!.visits.add(visit)
+        val max = checkNotNull(george.getPet("Max")) { "Test setup: Max not found on George" }
+        max.visits.add(visit)
     }
 
     @Test

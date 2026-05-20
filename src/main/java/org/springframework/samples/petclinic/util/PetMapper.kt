@@ -28,7 +28,7 @@ class PetMapper(private val visitMapper: VisitMapper) {
     }
 
     fun updateEntity(pet: Pet, form: PetForm) {
-        pet.name = form.name
+        pet.name = form.name ?: ""
         pet.birthDate = form.birthDate
         pet.type = form.type
     }

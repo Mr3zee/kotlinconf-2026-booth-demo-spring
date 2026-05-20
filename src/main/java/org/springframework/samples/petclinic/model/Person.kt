@@ -13,31 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.model;
+package org.springframework.samples.petclinic.model
 
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.validation.constraints.NotBlank;
-
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Column
+import jakarta.persistence.MappedSuperclass
+import jakarta.validation.constraints.NotBlank
 
 /**
- * Simple JavaBean domain object representing an person.
- *
- * @author Ken Krebs
+ * Simple JavaBean domain object representing a person.
  */
-@Getter
-@Setter
 @MappedSuperclass
-public class Person extends BaseEntity {
-
-	@Column
-	@NotBlank
-	private String firstName;
-
-	@Column
-	@NotBlank
-	private String lastName;
-
-}
+class Person(
+    @Column
+    @field:NotBlank
+    var firstName: String = "",
+    @Column
+    @field:NotBlank
+    var lastName: String = "",
+) : BaseEntity()

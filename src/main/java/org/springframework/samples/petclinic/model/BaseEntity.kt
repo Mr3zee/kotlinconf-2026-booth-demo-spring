@@ -13,36 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.model;
+package org.springframework.samples.petclinic.model
 
-import java.io.Serializable;
-
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
-
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.MappedSuperclass
+import java.io.Serializable
 
 /**
  * Simple JavaBean domain object with an id property. Used as a base class for objects
  * needing this property.
- *
- * @author Ken Krebs
- * @author Juergen Hoeller
  */
-@Getter
-@Setter
 @MappedSuperclass
-public class BaseEntity implements Serializable {
+class BaseEntity : Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Int? = null
 
-	public boolean isNew() {
-		return this.id == null;
-	}
-
+    fun isNew(): Boolean = id == null
 }

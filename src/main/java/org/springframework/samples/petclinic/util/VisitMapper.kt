@@ -19,14 +19,15 @@ import org.springframework.samples.petclinic.owner.Visit
 import org.springframework.samples.petclinic.owner.dto.VisitForm
 import org.springframework.samples.petclinic.owner.dto.VisitView
 import org.springframework.stereotype.Component
+import java.time.LocalDate
 
 @Component
 class VisitMapper {
 
     fun toEntity(form: VisitForm): Visit {
         val visit = Visit()
-        visit.date = form.date
-        visit.description = form.description
+        visit.date = form.date ?: LocalDate.now()
+        visit.description = form.description ?: ""
         return visit
     }
 

@@ -36,7 +36,7 @@ import java.util.Locale
 class PetTypeFormatter(private val types: PetTypeRepository) : Formatter<PetType> {
 
     override fun print(petType: PetType, locale: Locale): String {
-        return petType.name ?: "<null>"
+        return petType.name
     }
 
     @Throws(ParseException::class)
