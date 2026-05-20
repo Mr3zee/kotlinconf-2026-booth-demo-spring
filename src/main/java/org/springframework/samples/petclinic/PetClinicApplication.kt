@@ -13,25 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.util;
 
-import org.springframework.samples.petclinic.owner.Visit;
-import org.springframework.samples.petclinic.owner.dto.VisitForm;
-import org.springframework.samples.petclinic.owner.dto.VisitView;
-import org.springframework.stereotype.Component;
+package org.springframework.samples.petclinic
 
-@Component
-public class VisitMapper {
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+import org.springframework.context.annotation.ImportRuntimeHints
 
-	public Visit toEntity(VisitForm form) {
-		Visit visit = new Visit();
-		visit.setDate(form.getDate());
-		visit.setDescription(form.getDescription());
-		return visit;
-	}
+/**
+ * PetClinic Spring Boot Application.
+ *
+ * @author Dave Syer
+ */
+@SpringBootApplication
+@ImportRuntimeHints(PetClinicRuntimeHints::class)
+class PetClinicApplication
 
-	public VisitView toView(Visit visit) {
-		return new VisitView(visit.getId(), visit.getDate(), visit.getDescription());
-	}
-
+fun main(args: Array<String>) {
+    runApplication<PetClinicApplication>(*args)
 }

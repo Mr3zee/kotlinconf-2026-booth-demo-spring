@@ -13,17 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.util;
+package org.springframework.samples.petclinic.util
 
-import org.springframework.samples.petclinic.vet.Vet;
-import org.springframework.samples.petclinic.vet.dto.VetView;
-import org.springframework.stereotype.Component;
+import org.springframework.samples.petclinic.owner.Visit
+import org.springframework.samples.petclinic.owner.dto.VisitForm
+import org.springframework.samples.petclinic.owner.dto.VisitView
+import org.springframework.stereotype.Component
 
 @Component
-public class VetMapper {
+class VisitMapper {
 
-	public VetView toView(Vet vet) {
-		return new VetView(vet.getId(), vet.getFirstName(), vet.getLastName(), vet.getSpecialties());
-	}
+    fun toEntity(form: VisitForm): Visit {
+        val visit = Visit()
+        visit.date = form.date
+        visit.description = form.description
+        return visit
+    }
 
+    fun toView(visit: Visit): VisitView {
+        return VisitView(visit.id, visit.date, visit.description)
+    }
 }

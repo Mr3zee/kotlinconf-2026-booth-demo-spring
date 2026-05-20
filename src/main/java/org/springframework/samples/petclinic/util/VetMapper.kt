@@ -13,24 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.samples.petclinic.util
 
-package org.springframework.samples.petclinic;
+import org.springframework.samples.petclinic.vet.Vet
+import org.springframework.samples.petclinic.vet.dto.VetView
+import org.springframework.stereotype.Component
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ImportRuntimeHints;
+@Component
+class VetMapper {
 
-/**
- * PetClinic Spring Boot Application.
- *
- * @author Dave Syer
- */
-@SpringBootApplication
-@ImportRuntimeHints(PetClinicRuntimeHints.class)
-public class PetClinicApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(PetClinicApplication.class, args);
-	}
-
+    fun toView(vet: Vet): VetView {
+        return VetView(vet.id, vet.firstName, vet.lastName, vet.specialties)
+    }
 }
