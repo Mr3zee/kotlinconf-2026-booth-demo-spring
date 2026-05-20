@@ -25,6 +25,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
+import org.springframework.samples.petclinic.util.OwnerMapper;
 import org.springframework.samples.petclinic.util.PetMapper;
 import org.springframework.samples.petclinic.util.PetTypeFormatter;
 import org.springframework.samples.petclinic.util.VisitMapper;
@@ -51,7 +52,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @WebMvcTest(value = PetController.class,
 		includeFilters = @ComponentScan.Filter(value = PetTypeFormatter.class, type = FilterType.ASSIGNABLE_TYPE))
-@Import({ PetMapper.class, VisitMapper.class })
+@Import({ PetService.class, PetMapper.class, OwnerMapper.class, VisitMapper.class })
 @DisabledInNativeImage
 @DisabledInAotMode
 class PetControllerTests {

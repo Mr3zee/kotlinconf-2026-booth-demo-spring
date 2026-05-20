@@ -13,22 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.vet;
+package org.springframework.samples.petclinic.vet.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Simple domain object representing a list of veterinarians, serialized to JSON via
- * Jackson at the {@code /vets} endpoint.
- *
- * @author Arjen Poutsma
+ * JSON wrapper for the {@code /vets} endpoint. Serializes as
+ * {@code {"vetList": [...]}} via the single {@code getVetList()} getter,
+ * preserving the wire shape of the previous {@code Vets} entity wrapper.
  */
-public class Vets {
+public class VetsResource {
 
-	private List<Vet> vets;
+	private List<VetView> vets;
 
-	public List<Vet> getVetList() {
+	public List<VetView> getVetList() {
 		if (vets == null) {
 			vets = new ArrayList<>();
 		}

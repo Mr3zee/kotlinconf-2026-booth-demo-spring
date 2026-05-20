@@ -29,6 +29,8 @@ import org.junit.jupiter.api.condition.DisabledInNativeImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.samples.petclinic.util.OwnerMapper;
+import org.springframework.samples.petclinic.util.PetMapper;
 import org.springframework.samples.petclinic.util.VisitMapper;
 import org.springframework.test.context.aot.DisabledInAotMode;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -43,7 +45,7 @@ import java.util.Optional;
  * @author Wick Dynex
  */
 @WebMvcTest(VisitController.class)
-@Import(VisitMapper.class)
+@Import({ VisitService.class, OwnerMapper.class, PetMapper.class, VisitMapper.class })
 @DisabledInNativeImage
 @DisabledInAotMode
 class VisitControllerTests {

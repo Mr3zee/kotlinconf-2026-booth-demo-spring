@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @WebMvcTest(VetController.class)
-@Import(VetMapper.class)
+@Import({ VetService.class, VetMapper.class })
 @DisabledInNativeImage
 @DisabledInAotMode
 class VetControllerTests {

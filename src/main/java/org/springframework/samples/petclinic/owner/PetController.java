@@ -17,15 +17,12 @@ package org.springframework.samples.petclinic.owner;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Objects;
-import java.util.Optional;
 
+import org.springframework.samples.petclinic.owner.dto.OwnerView;
 import org.springframework.samples.petclinic.owner.dto.PetForm;
-import org.springframework.samples.petclinic.util.PetMapper;
 import org.springframework.samples.petclinic.util.PetValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -55,37 +52,22 @@ class PetController {
 
 	private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
 
-	private final OwnerRepository owners;
-
-	private final PetTypeRepository types;
-
-	private final PetMapper petMapper;
+	private final PetService petService;
 
 	@ModelAttribute("types")
 	public Collection<PetType> populatePetTypes() {
-		return this.types.findPetTypes();
+		return petService.findPetTypes();
 	}
 
 	@ModelAttribute("owner")
-	public Owner findOwner(@PathVariable("ownerId") int ownerId) {
-		Optional<Owner> optionalOwner = this.owners.findById(ownerId);
-		return optionalOwner.orElseThrow(() -> new IllegalArgumentException(
-				"Owner not found with id: " + ownerId + ". Please ensure the ID is correct "));
+	public OwnerView findOwner(@PathVariable("ownerId") int ownerId) {
+		return petService.findOwnerView(ownerId);
 	}
 
 	@ModelAttribute("pet")
 	public PetForm findPet(@PathVariable("ownerId") int ownerId,
 			@PathVariable(name = "petId", required = false) Integer petId) {
-
-		if (petId == null) {
-			return new PetForm();
-		}
-
-		Optional<Owner> optionalOwner = this.owners.findById(ownerId);
-		Owner owner = optionalOwner.orElseThrow(() -> new IllegalArgumentException(
-				"Owner not found with id: " + ownerId + ". Please ensure the ID is correct "));
-		Pet existing = owner.getPet(petId);
-		return existing == null ? new PetForm() : petMapper.toForm(existing);
+		return petService.findPetForm(ownerId, petId);
 	}
 
 	@InitBinder("owner")
@@ -100,16 +82,16 @@ class PetController {
 	}
 
 	@GetMapping("/pets/new")
-	public String initCreationForm(Owner owner, ModelMap model) {
+	public String initCreationForm(@PathVariable("ownerId") int ownerId, ModelMap model) {
 		model.put("pet", new PetForm());
 		return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 	}
 
 	@PostMapping("/pets/new")
-	public String processCreationForm(Owner owner, @Valid @ModelAttribute("pet") PetForm form, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+	public String processCreationForm(@PathVariable("ownerId") int ownerId,
+			@Valid @ModelAttribute("pet") PetForm form, BindingResult result, RedirectAttributes redirectAttributes) {
 
-		if (StringUtils.hasText(form.getName()) && owner.getPet(form.getName(), true) != null) {
+		if (StringUtils.hasText(form.getName()) && petService.isDuplicateName(ownerId, form.getName(), null)) {
 			result.rejectValue("name", "duplicate", "already exists");
 		}
 
@@ -122,9 +104,7 @@ class PetController {
 			return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 		}
 
-		Pet pet = petMapper.toEntity(form);
-		owner.addPet(pet);
-		this.owners.save(owner);
+		petService.create(ownerId, form);
 		redirectAttributes.addFlashAttribute("message", "New Pet has been Added");
 		return "redirect:/owners/{ownerId}";
 	}
@@ -135,16 +115,13 @@ class PetController {
 	}
 
 	@PostMapping("/pets/{petId}/edit")
-	public String processUpdateForm(Owner owner, @PathVariable("petId") int petId,
+	public String processUpdateForm(@PathVariable("ownerId") int ownerId, @PathVariable("petId") int petId,
 			@Valid @ModelAttribute("pet") PetForm form, BindingResult result, RedirectAttributes redirectAttributes) {
 
 		String petName = form.getName();
 
-		if (StringUtils.hasText(petName)) {
-			Pet existingPet = owner.getPet(petName, false);
-			if (existingPet != null && !Objects.equals(existingPet.getId(), petId)) {
-				result.rejectValue("name", "duplicate", "already exists");
-			}
+		if (StringUtils.hasText(petName) && petService.isDuplicateName(ownerId, petName, petId)) {
+			result.rejectValue("name", "duplicate", "already exists");
 		}
 
 		LocalDate currentDate = LocalDate.now();
@@ -156,16 +133,9 @@ class PetController {
 			return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 		}
 
-		updatePetDetails(owner, petId, form);
+		petService.update(ownerId, petId, form);
 		redirectAttributes.addFlashAttribute("message", "Pet details has been edited");
 		return "redirect:/owners/{ownerId}";
-	}
-
-	private void updatePetDetails(Owner owner, int petId, PetForm form) {
-		Pet existingPet = owner.getPet(petId);
-		Assert.state(existingPet != null, "Pet not found on owner for id=" + petId);
-		petMapper.updateEntity(existingPet, form);
-		this.owners.save(owner);
 	}
 
 }

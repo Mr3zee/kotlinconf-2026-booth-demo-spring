@@ -16,10 +16,8 @@
 package org.springframework.samples.petclinic.owner;
 
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.samples.petclinic.owner.dto.VisitForm;
-import org.springframework.samples.petclinic.util.VisitMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -47,9 +45,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 class VisitController {
 
-	private final OwnerRepository owners;
-
-	private final VisitMapper visitMapper;
+	private final VisitService visitService;
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
@@ -66,18 +62,8 @@ class VisitController {
 	@ModelAttribute("visit")
 	public VisitForm loadPetWithVisit(@PathVariable("ownerId") int ownerId, @PathVariable("petId") int petId,
 			Map<String, Object> model) {
-		Optional<Owner> optionalOwner = owners.findById(ownerId);
-		Owner owner = optionalOwner.orElseThrow(() -> new IllegalArgumentException(
-				"Owner not found with id: " + ownerId + ". Please ensure the ID is correct "));
-
-		Pet pet = owner.getPet(petId);
-		if (pet == null) {
-			throw new IllegalArgumentException(
-					"Pet with id " + petId + " not found for owner with id " + ownerId + ".");
-		}
-		model.put("pet", pet);
-		model.put("owner", owner);
-
+		model.put("owner", visitService.findOwnerView(ownerId));
+		model.put("pet", visitService.findPetView(ownerId, petId));
 		return new VisitForm();
 	}
 
@@ -91,16 +77,14 @@ class VisitController {
 	// Spring MVC calls method loadPetWithVisit(...) before processNewVisitForm is
 	// called
 	@PostMapping("/owners/{ownerId}/pets/{petId}/visits/new")
-	public String processNewVisitForm(@ModelAttribute Owner owner, @PathVariable int petId,
+	public String processNewVisitForm(@PathVariable("ownerId") int ownerId, @PathVariable("petId") int petId,
 			@Valid @ModelAttribute("visit") VisitForm form, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			return "pets/createOrUpdateVisitForm";
 		}
 
-		Visit visit = visitMapper.toEntity(form);
-		owner.addVisit(petId, visit);
-		this.owners.save(owner);
+		visitService.create(ownerId, petId, form);
 		redirectAttributes.addFlashAttribute("message", "Your visit has been booked");
 		return "redirect:/owners/{ownerId}";
 	}
