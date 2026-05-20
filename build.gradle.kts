@@ -7,6 +7,10 @@ plugins {
     id("org.cyclonedx.bom") version "3.2.0"
     id("io.spring.javaformat") version "0.0.47"
     id("io.spring.nohttp") version "0.0.11"
+    kotlin("jvm")
+    kotlin("plugin.spring") version "2.3.21"
+    kotlin("plugin.jpa") version "2.3.21"
+    kotlin("plugin.lombok") version "2.3.21"
 }
 
 gradle.startParameter.excludedTaskNames += listOf("checkFormatAot", "checkFormatAotTest")
@@ -31,6 +35,7 @@ val webjarsFontawesomeVersion = "4.7.0"
 val webjarsBootstrapVersion = "5.3.8"
 
 dependencies {
+    implementation(kotlin("reflect"))
     implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
@@ -61,6 +66,7 @@ dependencies {
     checkstyle("io.spring.javaformat:spring-javaformat-checkstyle:$springJavaformatCheckstyleVersion")
     checkstyle("com.puppycrawl.tools:checkstyle:$checkstyleVersion")
     testImplementation(kotlin("test"))
+    implementation("tools.jackson.module:jackson-module-kotlin")
 }
 
 tasks.named<Test>("test") {
