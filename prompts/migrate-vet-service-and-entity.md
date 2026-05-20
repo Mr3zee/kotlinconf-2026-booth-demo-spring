@@ -6,6 +6,6 @@ Guidelines:
 - Put Kotlin files in the `src/main/java` directory, alongside Java files.
 - Run tests after the migration
 - Run the server and check that related endpoints work
-- Explain your choices briefly
+- Explain your choices briefly after all is done
 
 Do not migrate other files. Do not refactor unrelated code.
