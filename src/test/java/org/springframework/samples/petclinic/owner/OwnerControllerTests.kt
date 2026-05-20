@@ -25,11 +25,10 @@ import org.hamcrest.Matchers.not
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.condition.DisabledInNativeImage
-import org.mockito.ArgumentMatchers.any
-import org.mockito.ArgumentMatchers.anyString
-import org.mockito.ArgumentMatchers.eq
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.`when`
+import org.mockito.kotlin.any
+import org.mockito.kotlin.eq
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest
 import org.springframework.context.annotation.Import
@@ -93,7 +92,7 @@ internal class OwnerControllerTests {
     @BeforeEach
     fun setup() {
         val george = george()
-        given(owners.findByLastNameStartingWith(eq("Franklin"), any(Pageable::class.java)))
+        given(owners.findByLastNameStartingWith(eq("Franklin"), any<Pageable>()))
             .willReturn(PageImpl(listOf(george)))
 
         given(owners.findById(TEST_OWNER_ID)).willReturn(Optional.of(george))
@@ -148,14 +147,14 @@ internal class OwnerControllerTests {
         val other = Owner()
         other.id = TEST_OWNER_ID + 1
         val tasks = PageImpl(listOf(george(), other))
-        `when`(owners.findByLastNameStartingWith(anyString(), any(Pageable::class.java))).thenReturn(tasks)
+        `when`(owners.findByLastNameStartingWith(any<String>(), any<Pageable>())).thenReturn(tasks)
         mockMvc.perform(get("/owners?page=1")).andExpect(status().isOk).andExpect(view().name("owners/ownersList"))
     }
 
     @Test
     fun processFindFormByLastName() {
         val tasks = PageImpl(listOf(george()))
-        `when`(owners.findByLastNameStartingWith(eq("Franklin"), any(Pageable::class.java))).thenReturn(tasks)
+        `when`(owners.findByLastNameStartingWith(eq("Franklin"), any<Pageable>())).thenReturn(tasks)
         mockMvc.perform(get("/owners?page=1").param("lastName", "Franklin"))
             .andExpect(status().is3xxRedirection)
             .andExpect(view().name("redirect:/owners/$TEST_OWNER_ID"))
@@ -164,7 +163,7 @@ internal class OwnerControllerTests {
     @Test
     fun processFindFormNoOwnersFound() {
         val tasks = PageImpl<Owner>(listOf())
-        `when`(owners.findByLastNameStartingWith(eq("Unknown Surname"), any(Pageable::class.java))).thenReturn(tasks)
+        `when`(owners.findByLastNameStartingWith(eq("Unknown Surname"), any<Pageable>())).thenReturn(tasks)
         mockMvc.perform(get("/owners?page=1").param("lastName", "Unknown Surname"))
             .andExpect(status().isOk)
             .andExpect(model().attributeHasFieldErrors("owner", "lastName"))

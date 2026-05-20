@@ -10,7 +10,6 @@ plugins {
     kotlin("jvm") version "2.3.21"
     kotlin("plugin.spring") version "2.3.21"
     kotlin("plugin.jpa") version "2.3.21"
-    kotlin("plugin.lombok") version "2.3.21"
 }
 
 gradle.startParameter.excludedTaskNames += listOf("checkFormatAot", "checkFormatAotTest")
@@ -42,10 +41,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("javax.cache:cache-api")
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
-    testCompileOnly("org.projectlombok:lombok")
-    testAnnotationProcessor("org.projectlombok:lombok")
     runtimeOnly("org.springframework.boot:spring-boot-starter-actuator")
     runtimeOnly("org.webjars:webjars-locator-lite:$webjarsLocatorLiteVersion")
     runtimeOnly("org.webjars.npm:bootstrap:$webjarsBootstrapVersion")
@@ -68,6 +63,7 @@ dependencies {
     implementation(kotlin("reflect"))
     implementation("tools.jackson.module:jackson-module-kotlin")
     testImplementation(kotlin("test"))
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
 }
 
 kotlin {

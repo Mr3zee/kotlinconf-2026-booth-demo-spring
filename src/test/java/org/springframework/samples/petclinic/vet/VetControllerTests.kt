@@ -18,8 +18,8 @@ package org.springframework.samples.petclinic.vet
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.condition.DisabledInNativeImage
-import org.mockito.ArgumentMatchers.any
 import org.mockito.BDDMockito.given
+import org.mockito.kotlin.any
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest
 import org.springframework.context.annotation.Import
@@ -76,7 +76,7 @@ internal class VetControllerTests {
     @BeforeEach
     fun setup() {
         given(vets.findAll()).willReturn(arrayListOf(james(), helen()))
-        given(vets.findAll(any(Pageable::class.java)))
+        given(vets.findAll(any<Pageable>()))
             .willReturn(PageImpl(arrayListOf(james(), helen())))
     }
 

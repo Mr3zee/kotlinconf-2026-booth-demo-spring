@@ -13,18 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.samples.petclinic.system
 
-package org.springframework.samples.petclinic.system;
+import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.GetMapping
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-
+/**
+ * Controller used to showcase what happens when an exception is thrown.
+ *
+ * Also see how a view that resolves to `error` has been added (`error.html`).
+ */
 @Controller
-class WelcomeController {
+internal class CrashController {
 
-	@GetMapping("/")
-	public String welcome() {
-		return "welcome";
-	}
-
+    @GetMapping("/oups")
+    fun triggerException(): String {
+        throw RuntimeException(
+            "Expected: controller used to showcase what happens when an exception is thrown"
+        )
+    }
 }
