@@ -7,6 +7,10 @@ plugins {
     id("org.cyclonedx.bom") version "3.2.0"
     id("io.spring.javaformat") version "0.0.47"
     id("io.spring.nohttp") version "0.0.11"
+    kotlin("jvm") version "2.3.21"
+    kotlin("plugin.spring") version "2.3.21"
+    kotlin("plugin.jpa") version "2.3.21"
+    kotlin("plugin.lombok") version "2.3.21"
 }
 
 gradle.startParameter.excludedTaskNames += listOf("checkFormatAot", "checkFormatAotTest")
@@ -60,7 +64,17 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers-mysql")
     checkstyle("io.spring.javaformat:spring-javaformat-checkstyle:$springJavaformatCheckstyleVersion")
     checkstyle("com.puppycrawl.tools:checkstyle:$checkstyleVersion")
+    implementation(kotlin("stdlib"))
+    implementation(kotlin("reflect"))
+    implementation("tools.jackson.module:jackson-module-kotlin")
     testImplementation(kotlin("test"))
+}
+
+kotlin {
+    jvmToolchain(25)
+    compilerOptions {
+        freeCompilerArgs.add("-Xjsr305=strict")
+    }
 }
 
 tasks.named<Test>("test") {

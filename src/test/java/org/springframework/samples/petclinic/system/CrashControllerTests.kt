@@ -13,29 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.springframework.samples.petclinic.system
 
-package org.springframework.samples.petclinic.system;
-
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import org.assertj.core.api.Assertions.assertThatExceptionOfType
+import org.junit.jupiter.api.Test
 
 /**
- * Test class for {@link CrashController}
+ * Test class for [CrashController]
  *
  * @author Colin But
  * @author Alex Lutz
  */
 // Waiting https://github.com/spring-projects/spring-boot/issues/5574 ..good
 // luck ((plain(st) UNIT test)! :)
-class CrashControllerTests {
+internal class CrashControllerTests {
 
-	final CrashController testee = new CrashController();
+    val testee = CrashController()
 
-	@Test
-	void triggerException() {
-		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> testee.triggerException())
-			.withMessageContaining("Expected: controller used to showcase what happens when an exception is thrown");
-	}
-
+    @Test
+    fun triggerException() {
+        assertThatExceptionOfType(RuntimeException::class.java)
+            .isThrownBy { testee.triggerException() }
+            .withMessageContaining("Expected: controller used to showcase what happens when an exception is thrown")
+    }
 }
