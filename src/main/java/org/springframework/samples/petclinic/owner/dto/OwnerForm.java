@@ -25,7 +25,8 @@ import lombok.NoArgsConstructor;
 /**
  * Form-backing DTO for creating or updating an
  * {@link org.springframework.samples.petclinic.owner.Owner}. Lives at the controller
- * boundary; the controller maps to/from the entity via {@link OwnerMapper}.
+ * boundary; the controller maps to/from the entity via
+ * {@link org.springframework.samples.petclinic.util.OwnerMapper}.
  */
 @Data
 @NoArgsConstructor

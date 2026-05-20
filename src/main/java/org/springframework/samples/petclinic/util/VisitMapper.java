@@ -13,16 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.vet.dto;
+package org.springframework.samples.petclinic.util;
 
-import org.springframework.samples.petclinic.vet.Vet;
+import org.springframework.samples.petclinic.owner.Visit;
+import org.springframework.samples.petclinic.owner.dto.VisitForm;
+import org.springframework.samples.petclinic.owner.dto.VisitView;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VetMapper {
+public class VisitMapper {
 
-	public VetView toView(Vet vet) {
-		return new VetView(vet.getId(), vet.getFirstName(), vet.getLastName(), vet.getSpecialties());
+	public Visit toEntity(VisitForm form) {
+		Visit visit = new Visit();
+		visit.setDate(form.getDate());
+		visit.setDescription(form.getDescription());
+		return visit;
+	}
+
+	public VisitView toView(Visit visit) {
+		return new VisitView(visit.getId(), visit.getDate(), visit.getDescription());
 	}
 
 }

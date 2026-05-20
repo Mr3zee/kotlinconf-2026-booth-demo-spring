@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.samples.petclinic.owner.dto.VisitForm;
-import org.springframework.samples.petclinic.owner.dto.VisitMapper;
+import org.springframework.samples.petclinic.util.VisitMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;

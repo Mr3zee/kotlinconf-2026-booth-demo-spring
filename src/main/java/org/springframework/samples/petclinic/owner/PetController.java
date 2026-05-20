@@ -21,7 +21,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.samples.petclinic.owner.dto.PetForm;
-import org.springframework.samples.petclinic.owner.dto.PetMapper;
+import org.springframework.samples.petclinic.util.PetMapper;
+import org.springframework.samples.petclinic.util.PetValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;

@@ -13,11 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner.dto;
+package org.springframework.samples.petclinic.util;
 
 import java.util.List;
 
 import org.springframework.samples.petclinic.owner.Pet;
+import org.springframework.samples.petclinic.owner.dto.PetForm;
+import org.springframework.samples.petclinic.owner.dto.PetView;
+import org.springframework.samples.petclinic.owner.dto.VisitView;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
