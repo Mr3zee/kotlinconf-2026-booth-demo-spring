@@ -1,1 +1,21 @@
+### Owner visit insights
 GET http://localhost:8080/owners/1/insights
+
+### Preview visit note - happy path
+POST http://localhost:8080/owners/1/visit-notes/preview
+Content-Type: application/json
+
+{
+  "petName": "Leo",
+  "note": "Annual checkup, looking healthy",
+  "visitedOn": "2026-05-15"
+}
+
+### Preview visit note - missing required "note"
+POST http://localhost:8080/owners/1/visit-notes/preview
+Content-Type: application/json
+
+{
+  "petName": "Leo",
+  "visitedOn": "2026-05-15"
+}
