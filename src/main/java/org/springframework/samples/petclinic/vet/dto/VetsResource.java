@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JSON wrapper for the {@code /vets} endpoint. Serializes as
- * {@code {"vetList": [...]}} via the single {@code getVetList()} getter,
- * preserving the wire shape of the previous {@code Vets} entity wrapper.
+ * JSON wrapper for the {@code /vets} endpoint. Serializes as {@code {"vetList": [...]}}
+ * via the single {@code getVetList()} getter, preserving the wire shape of the previous
+ * {@code Vets} entity wrapper.
  */
 public class VetsResource {
 
