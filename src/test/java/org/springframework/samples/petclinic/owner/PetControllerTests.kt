@@ -72,6 +72,7 @@ internal class PetControllerTests {
         given(types.findPetTypes()).willReturn(listOf(cat))
 
         val owner = Owner()
+        owner.id = TEST_OWNER_ID
         val pet = Pet()
         val dog = Pet()
         owner.addPet(pet)

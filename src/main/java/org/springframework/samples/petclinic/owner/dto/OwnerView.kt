@@ -13,25 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.vet.dto;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.springframework.samples.petclinic.owner.dto
 
 /**
- * JSON wrapper for the {@code /vets} endpoint. Serializes as {@code {"vetList": [...]}}
- * via the single {@code getVetList()} getter, preserving the wire shape of the previous
- * {@code Vets} entity wrapper.
+ * Read-only view DTO for rendering an
+ * [org.springframework.samples.petclinic.owner.Owner]. Always materialised from a
+ * persisted entity, so every field the schema declares non-null is non-null here too.
  */
-public class VetsResource {
-
-	private List<VetView> vets;
-
-	public List<VetView> getVetList() {
-		if (vets == null) {
-			vets = new ArrayList<>();
-		}
-		return vets;
-	}
-
-}
+data class OwnerView(
+    val id: Int,
+    val firstName: String,
+    val lastName: String,
+    val address: String,
+    val city: String,
+    val telephone: String,
+    val pets: List<PetView>,
+)

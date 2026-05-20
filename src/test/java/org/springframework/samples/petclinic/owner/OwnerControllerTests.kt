@@ -98,6 +98,7 @@ internal class OwnerControllerTests {
 
         given(owners.findById(TEST_OWNER_ID)).willReturn(Optional.of(george))
         val visit = Visit()
+        visit.id = 1
         visit.date = LocalDate.now()
         george.getPet("Max")!!.visits.add(visit)
     }
@@ -143,7 +144,9 @@ internal class OwnerControllerTests {
 
     @Test
     fun processFindFormSuccess() {
-        val tasks = PageImpl(listOf(george(), Owner()))
+        val other = Owner()
+        other.id = TEST_OWNER_ID + 1
+        val tasks = PageImpl(listOf(george(), other))
         `when`(owners.findByLastNameStartingWith(anyString(), any(Pageable::class.java))).thenReturn(tasks)
         mockMvc.perform(get("/owners?page=1")).andExpect(status().isOk).andExpect(view().name("owners/ownersList"))
     }

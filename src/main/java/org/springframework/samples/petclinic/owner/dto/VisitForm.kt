@@ -13,35 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner.dto;
+package org.springframework.samples.petclinic.owner.dto
 
-import java.time.LocalDate;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import jakarta.validation.constraints.NotBlank;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank
+import org.springframework.format.annotation.DateTimeFormat
+import java.time.LocalDate
 
 /**
  * Form-backing DTO for booking a new
- * {@link org.springframework.samples.petclinic.owner.Visit}.
+ * [org.springframework.samples.petclinic.owner.Visit].
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class VisitForm {
+data class VisitForm(
+    @field:DateTimeFormat(pattern = "yyyy-MM-dd")
+    var date: LocalDate? = LocalDate.now(),
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate date = LocalDate.now();
+    @field:NotBlank
+    var description: String? = null,
+) {
 
-	@NotBlank
-	private String description;
-
-	public boolean isNew() {
-		return true;
-	}
-
+    val isNew: Boolean
+        get() = true
 }

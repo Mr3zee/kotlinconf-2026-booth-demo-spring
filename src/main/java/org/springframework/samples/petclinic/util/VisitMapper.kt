@@ -31,6 +31,7 @@ class VisitMapper {
     }
 
     fun toView(visit: Visit): VisitView {
-        return VisitView(visit.id, visit.date, visit.description)
+        val id = checkNotNull(visit.id) { "Cannot build VisitView from a transient Visit (id is null)" }
+        return VisitView(id, visit.date, visit.description)
     }
 }

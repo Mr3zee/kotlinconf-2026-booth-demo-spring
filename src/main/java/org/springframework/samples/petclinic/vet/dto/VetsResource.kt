@@ -13,31 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner.dto;
+package org.springframework.samples.petclinic.vet.dto
 
-import java.time.LocalDate;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty
 
 /**
- * Read-only view DTO for rendering a
- * {@link org.springframework.samples.petclinic.owner.Visit}.
+ * JSON wrapper for the `/vets` endpoint. Serializes as `{"vetList": [...]}`
+ * via the [vetList] property, preserving the wire shape of the previous
+ * `Vets` entity wrapper.
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class VisitView {
+class VetsResource {
 
-	private Integer id;
-
-	private LocalDate date;
-
-	private String description;
-
-	public boolean isNew() {
-		return this.id == null;
-	}
-
+    @get:JsonProperty("vetList")
+    val vetList: MutableList<VetView> = mutableListOf()
 }

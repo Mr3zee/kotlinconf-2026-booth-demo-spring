@@ -41,6 +41,7 @@ class PetMapper(private val visitMapper: VisitMapper) {
 
     fun toView(pet: Pet): PetView {
         val visits = pet.visits.map { visitMapper.toView(it) }
-        return PetView(pet.id, pet.name, pet.birthDate, pet.type, visits)
+        val id = checkNotNull(pet.id) { "Cannot build PetView from a transient Pet (id is null)" }
+        return PetView(id, pet.name, pet.birthDate, pet.type, visits)
     }
 }

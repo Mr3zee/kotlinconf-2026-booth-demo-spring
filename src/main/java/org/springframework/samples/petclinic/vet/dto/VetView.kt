@@ -13,17 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.util
+package org.springframework.samples.petclinic.vet.dto
 
-import org.springframework.samples.petclinic.vet.Vet
-import org.springframework.samples.petclinic.vet.dto.VetView
-import org.springframework.stereotype.Component
+import org.springframework.samples.petclinic.vet.Specialty
 
-@Component
-class VetMapper {
+/**
+ * Read-only view DTO for rendering a
+ * [org.springframework.samples.petclinic.vet.Vet]. Keeps [Specialty]
+ * references so the existing template can render `${specialty.name}` unchanged.
+ */
+data class VetView(
+    val id: Int,
+    val firstName: String,
+    val lastName: String,
+    val specialties: List<Specialty>,
+) {
 
-    fun toView(vet: Vet): VetView {
-        val id = checkNotNull(vet.id) { "Cannot build VetView from a transient Vet (id is null)" }
-        return VetView(id, vet.firstName, vet.lastName, vet.specialties)
-    }
+    val nrOfSpecialties: Int
+        get() = specialties.size
 }

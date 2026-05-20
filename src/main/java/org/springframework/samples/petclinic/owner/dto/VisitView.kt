@@ -13,35 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner.dto;
+package org.springframework.samples.petclinic.owner.dto
 
-import java.util.List;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.LocalDate
 
 /**
- * Read-only view DTO for rendering an
- * {@link org.springframework.samples.petclinic.owner.Owner}.
+ * Read-only view DTO for rendering a
+ * [org.springframework.samples.petclinic.owner.Visit].
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class OwnerView {
+data class VisitView(
+    val id: Int,
+    val date: LocalDate,
+    val description: String,
+) {
 
-	private Integer id;
-
-	private String firstName;
-
-	private String lastName;
-
-	private String address;
-
-	private String city;
-
-	private String telephone;
-
-	private List<PetView> pets;
-
+    val isNew: Boolean
+        get() = false
 }

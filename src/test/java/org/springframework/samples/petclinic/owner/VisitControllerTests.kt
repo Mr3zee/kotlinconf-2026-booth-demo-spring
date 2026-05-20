@@ -56,6 +56,7 @@ internal class VisitControllerTests {
     @BeforeEach
     fun init() {
         val owner = Owner()
+        owner.id = TEST_OWNER_ID
         val pet = Pet()
         owner.addPet(pet)
         pet.id = TEST_PET_ID

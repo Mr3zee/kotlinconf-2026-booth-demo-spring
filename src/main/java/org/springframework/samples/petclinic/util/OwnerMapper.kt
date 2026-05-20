@@ -43,6 +43,7 @@ class OwnerMapper(private val petMapper: PetMapper) {
 
     fun toView(owner: Owner): OwnerView {
         val pets = owner.pets.map { petMapper.toView(it) }
-        return OwnerView(owner.id, owner.firstName, owner.lastName, owner.address, owner.city, owner.telephone, pets)
+        val id = checkNotNull(owner.id) { "Cannot build OwnerView from a transient Owner (id is null)" }
+        return OwnerView(id, owner.firstName, owner.lastName, owner.address, owner.city, owner.telephone, pets)
     }
 }
