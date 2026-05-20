@@ -13,6 +13,10 @@ Guidelines:
 - Use the 2.3.21 Kotlin version.
 - Update the project setup (gradle only, ignore maven)
 - Put Kotlin files in the `src/main/java` directory, alongside Java files.
+- No !! operators
+- Don’t stick to Java 1-1 mapping, use Kotlin benefits and features to make code more concise
+- Rely on Kotlin compiler plugins like allopen for smaller code footprint
+- Entities and DTOs should use non-nullable types where implied by schema 
 - Run tests after the migration
 - Run the server and check that related endpoints work
 - Explain your choices briefly after all is done
