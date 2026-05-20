@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2025 the original author or authors.
+ * Copyright 2012-2026 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.vet;
+package org.springframework.samples.petclinic.vet
 
-import org.springframework.samples.petclinic.model.NamedEntity;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.Entity
+import jakarta.persistence.Table
+import org.springframework.samples.petclinic.model.NamedEntity
 
 /**
- * Models a {@link Vet Vet's} specialty (for example, dentistry).
- *
- * @author Juergen Hoeller
+ * Models a [Vet] specialty (for example, dentistry).
  */
 @Entity
 @Table(name = "specialties")
-public class Specialty extends NamedEntity {
-
-}
+open class Specialty : NamedEntity()
