@@ -30,10 +30,4 @@ Gradle:
 ./gradlew bootRun
 ```
 
-Maven:
-
-```bash
-./mvnw spring-boot:run
-```
-
 Then open http://localhost:8080/.
