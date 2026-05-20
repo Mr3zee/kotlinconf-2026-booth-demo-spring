@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.util;
 
+import org.jspecify.annotations.NullMarked;
 import org.springframework.format.Formatter;
 import org.springframework.samples.petclinic.owner.PetType;
 import org.springframework.samples.petclinic.owner.PetTypeRepository;
@@ -31,7 +32,7 @@ import lombok.RequiredArgsConstructor;
  * Instructs Spring MVC on how to parse and print elements of type 'PetType'. Starting
  * from Spring 3.0, Formatters have come as an improvement in comparison to legacy
  * PropertyEditors. See the following links for more details: - The Spring ref doc:
- * https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#format
+ * <a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#format">...</a>
  *
  * @author Mark Fisher
  * @author Juergen Hoeller
@@ -44,12 +45,14 @@ public class PetTypeFormatter implements Formatter<PetType> {
 	private final PetTypeRepository types;
 
 	@Override
+	@NullMarked
 	public String print(PetType petType, Locale locale) {
 		String name = petType.getName();
 		return name != null ? name : "<null>";
 	}
 
 	@Override
+	@NullMarked
 	public PetType parse(String text, Locale locale) throws ParseException {
 		Collection<PetType> findPetTypes = this.types.findPetTypes();
 		for (PetType type : findPetTypes) {

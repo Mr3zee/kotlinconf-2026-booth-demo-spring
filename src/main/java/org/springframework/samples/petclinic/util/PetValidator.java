@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.util;
 
+import org.jspecify.annotations.NullMarked;
 import org.springframework.samples.petclinic.owner.dto.PetForm;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
@@ -35,6 +36,7 @@ public class PetValidator implements Validator {
 	private static final String REQUIRED = "required";
 
 	@Override
+	@NullMarked
 	public void validate(Object obj, Errors errors) {
 		PetForm form = (PetForm) obj;
 		String name = form.getName();
@@ -55,6 +57,7 @@ public class PetValidator implements Validator {
 	 * This Validator validates *just* PetForm instances
 	 */
 	@Override
+	@NullMarked
 	public boolean supports(Class<?> clazz) {
 		return PetForm.class.isAssignableFrom(clazz);
 	}
