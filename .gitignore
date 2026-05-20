@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 .claude/worktrees
 .claude/scheduled_tasks.lock
+.kotlin
 
 ### STS ###
 .apt_generated
