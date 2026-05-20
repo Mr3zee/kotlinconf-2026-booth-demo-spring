@@ -32,7 +32,8 @@ import lombok.RequiredArgsConstructor;
  * Instructs Spring MVC on how to parse and print elements of type 'PetType'. Starting
  * from Spring 3.0, Formatters have come as an improvement in comparison to legacy
  * PropertyEditors. See the following links for more details: - The Spring ref doc:
- * <a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#format">...</a>
+ * <a href=
+ * "https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#format">...</a>
  *
  * @author Mark Fisher
  * @author Juergen Hoeller
