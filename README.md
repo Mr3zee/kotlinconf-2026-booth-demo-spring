@@ -22,18 +22,21 @@ Each prompt drives the demo from the `main` branch state to a target setup. See 
 | [`kotlin-maven`](https://github.com/Mr3zee/kotlinconf-2026-booth-demo-spring/tree/kotlin-maven)                                                         | [`migrate-to-maven-with-kotlin.md`](prompts/migrate-to-maven-with-kotlin.md)      | Build migrated to **Maven + Kotlin**, with `Specialty.kt` as a sample Kotlin file.                               |
 | [`kotlin-toolchain`](https://github.com/Mr3zee/kotlinconf-2026-booth-demo-spring/tree/kotlin-toolchain)                                                 | [`migrate-to-kotlin-toolchain.md`](prompts/migrate-to-kotlin-toolchain.md)        | Build migrated to a [Kotlin Toolchain](https://kotlin-toolchain.org/latest/) setup, with `Specialty.kt`.         |
 
-## Running the app (main)
+## This branch — `add-kotlin-file-to-existing-java-project`
+
+Hand-prepared starting point for "Kotlin in a Java project" demos:
+
+- Kotlin Gradle plugins (`jvm`, `plugin.spring`, `plugin.jpa`, `plugin.lombok`) added to `build.gradle.kts`, `kotlin("jvm")` version pinned in `settings.gradle.kts`.
+- Adds `tools.jackson.module:jackson-module-kotlin` and `kotlin("reflect")` to dependencies.
+- New Kotlin service `VisitInsights.kt` (`VisitInsightsService` + related DTOs) under `src/main/java/.../owner/`.
+- `OwnerController` exposes `GET /owners/{id}/insights` and `POST /owners/{id}/visit-notes/preview` backed by the new service.
+
+## Running the app
 
 Gradle:
 
 ```bash
 ./gradlew bootRun
-```
-
-Maven:
-
-```bash
-./mvnw spring-boot:run
 ```
 
 Then open http://localhost:8080/.
