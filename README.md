@@ -2,24 +2,25 @@
 
 A demo project showcasing **Spring + Kotlin** scenarios — how to take an existing Spring Boot application and evolve it to use Kotlin in different ways.
 
-The codebase is a stripped-down Spring Petclinic used purely as a realistic carrier for the demo. 
-The interesting part is *not* the app itself but the **build/setup migrations** demonstrated on different branches, 
+The codebase is a stripped-down Spring Petclinic used purely as a realistic carrier for the demo.
+The interesting part is *not* the app itself but the **build/setup and code migrations** demonstrated on different branches,
 driven by the prompts in [`prompts/`](prompts/).
 
 ## Demo scenarios (prompts)
 
-Each prompt drives the demo from the `main` branch state to a target setup.
-
-- [`prompts/migrate-to-maven-with-kotlin.md`](prompts/migrate-to-maven-with-kotlin.md) — migrate to a Maven + Kotlin setup.
-- [`prompts/migrate-to-kotlin-toolchain.md`](prompts/migrate-to-kotlin-toolchain.md) — migrate to a [Kotlin Toolchain](https://kotlin-toolchain.org/latest/) setup.
+Each prompt drives the demo from the `main` branch state to a target setup. See [`prompts/README.md`](prompts/README.md) for the full list and the branch each one produces.
 
 ## Branches
 
-| Branch             | State                                                                                                |
-|--------------------|------------------------------------------------------------------------------------------------------|
-| `main`             | Baseline Spring Boot Petclinic on **Gradle (Kotlin DSL)**, pure Java. Starting point for every demo. |
-| `kotlin-maven`     | Result of running `migrate-to-maven-with-kotlin.md` — **Maven + Kotlin** build with `Specialty.kt`.  |
-| `kotlin-toolchain` | Result of running `migrate-to-kotlin-toolchain.md` — **Kotlin Toolchain** build with `Specialty.kt`. |
+| Branch                                     | Prompt                                                                            | State                                                                                                            |
+|--------------------------------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| `main`                                     | —                                                                                 | Baseline Spring Boot Petclinic on **Gradle (Kotlin DSL)**, pure Java. Starting point for every demo.             |
+| `add-kotlin-file-to-existing-java-project` | —                                                                                 | Adds Kotlin support to the Gradle build and introduces a single Kotlin service (`VisitInsights.kt`).             |
+| `rewrite-owner-mapper`                     | [`rewrite-owner-mapper.md`](prompts/rewrite-owner-mapper.md)                      | `OwnerMapper` rewritten in Kotlin, leaving the rest of the project untouched.                                    |
+| `migrate-ver-service-and-entity`           | [`migrate-vet-service-and-entity.md`](prompts/migrate-vet-service-and-entity.md)  | `VetService`, `Vet`, and `VetView` migrated to idiomatic Kotlin.                                                 |
+| `full-migration`                           | [`full-migration-in-steps.md`](prompts/full-migration-in-steps.md)                | Full Java → Kotlin migration done in 6 reviewable steps (tests → utils → DTOs → services → entities → controllers). |
+| `kotlin-maven`                             | [`migrate-to-maven-with-kotlin.md`](prompts/migrate-to-maven-with-kotlin.md)      | Build migrated to **Maven + Kotlin**, with `Specialty.kt` as a sample Kotlin file.                               |
+| `kotlin-toolchain`                         | [`migrate-to-kotlin-toolchain.md`](prompts/migrate-to-kotlin-toolchain.md)        | Build migrated to a [Kotlin Toolchain](https://kotlin-toolchain.org/latest/) setup, with `Specialty.kt`.         |
 
 ## Running the app (main)
 
