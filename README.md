@@ -22,9 +22,15 @@ Each prompt drives the demo from the `main` branch state to a target setup. See 
 | [`kotlin-maven`](https://github.com/Mr3zee/kotlinconf-2026-booth-demo-spring/tree/kotlin-maven)                                                         | [`migrate-to-maven-with-kotlin.md`](prompts/migrate-to-maven-with-kotlin.md)      | Build migrated to **Maven + Kotlin**, with `Specialty.kt` as a sample Kotlin file.                               |
 | [`kotlin-toolchain`](https://github.com/Mr3zee/kotlinconf-2026-booth-demo-spring/tree/kotlin-toolchain)                                                 | [`migrate-to-kotlin-toolchain.md`](prompts/migrate-to-kotlin-toolchain.md)        | Build migrated to a [Kotlin Toolchain](https://kotlin-toolchain.org/latest/) setup, with `Specialty.kt`.         |
 
-## Running the app (main)
+## This branch — `full-migration`
 
-Gradle:
+Result of running [`full-migration-in-steps.md`](prompts/full-migration-in-steps.md):
+
+- All Java sources (entities, DTOs, services, controllers, runtime hints, app entry point) converted to Kotlin in 6 commits, one per step.
+- Kotlin version 2.3.21 with `allopen` plugin; Kotlin sources live alongside the old Java tree under `src/main/java`.
+- Maven build (`pom.xml`, `mvnw`, `.mvn/`) removed — Gradle (Kotlin DSL) is the only build.
+
+## Running the app
 
 ```bash
 ./gradlew bootRun
