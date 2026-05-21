@@ -22,9 +22,16 @@ Each prompt drives the demo from the `main` branch state to a target setup. See 
 | [`kotlin-maven`](https://github.com/Mr3zee/kotlinconf-2026-booth-demo-spring/tree/kotlin-maven)                                                         | [`migrate-to-maven-with-kotlin.md`](prompts/migrate-to-maven-with-kotlin.md)      | Build migrated to **Maven + Kotlin**, with `Specialty.kt` as a sample Kotlin file.                               |
 | [`kotlin-toolchain`](https://github.com/Mr3zee/kotlinconf-2026-booth-demo-spring/tree/kotlin-toolchain)                                                 | [`migrate-to-kotlin-toolchain.md`](prompts/migrate-to-kotlin-toolchain.md)        | Build migrated to a [Kotlin Toolchain](https://kotlin-toolchain.org/latest/) setup, with `Specialty.kt`.         |
 
-## Running the app (main)
+## This branch — `migrate-ver-service-and-entity`
 
-Gradle:
+Result of running [`migrate-vet-service-and-entity.md`](prompts/migrate-vet-service-and-entity.md):
+
+- `Vet.java`, `VetService.java`, and `VetView.java` converted to Kotlin under the same packages; Java originals removed.
+- `build.gradle.kts` gets Kotlin (`jvm`, `plugin.spring`, `plugin.jpa`) at version 2.3.21 alongside Java.
+- Maven build (`pom.xml`, `mvnw`, `.mvn/`) removed — Gradle (Kotlin DSL) is the only build.
+- All other files untouched.
+
+## Running the app
 
 ```bash
 ./gradlew bootRun
