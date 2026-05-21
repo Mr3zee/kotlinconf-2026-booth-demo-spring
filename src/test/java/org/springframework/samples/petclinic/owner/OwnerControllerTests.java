@@ -61,7 +61,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author Wick Dynex
  */
 @WebMvcTest(OwnerController.class)
-@Import({ OwnerService.class, OwnerMapper.class, PetMapper.class, VisitMapper.class })
+@Import({ OwnerService.class, OwnerMapper.class, PetMapper.class, VisitMapper.class, VisitInsightsService.class })
 @DisabledInNativeImage
 @DisabledInAotMode
 class OwnerControllerTests {
