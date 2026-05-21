@@ -22,9 +22,15 @@ Each prompt drives the demo from the `main` branch state to a target setup. See 
 | [`kotlin-maven`](https://github.com/Mr3zee/kotlinconf-2026-booth-demo-spring/tree/kotlin-maven)                                                         | [`migrate-to-maven-with-kotlin.md`](prompts/migrate-to-maven-with-kotlin.md)      | Build migrated to **Maven + Kotlin**, with `Specialty.kt` as a sample Kotlin file.                               |
 | [`kotlin-toolchain`](https://github.com/Mr3zee/kotlinconf-2026-booth-demo-spring/tree/kotlin-toolchain)                                                 | [`migrate-to-kotlin-toolchain.md`](prompts/migrate-to-kotlin-toolchain.md)        | Build migrated to a [Kotlin Toolchain](https://kotlin-toolchain.org/latest/) setup, with `Specialty.kt`.         |
 
-## Running the app
+## This branch — `kotlin-maven`
 
-You are on the `kotlin-maven` branch — the build is Maven + Kotlin (no Gradle):
+Result of running [`migrate-to-maven-with-kotlin.md`](prompts/migrate-to-maven-with-kotlin.md):
+
+- Gradle build (`build.gradle.kts`, `settings.gradle.kts`, `gradlew*`, `gradle/`) removed; build driven by Maven (`pom.xml`).
+- `pom.xml` wires up `kotlin-maven-plugin` with the Spring/JPA compiler plugins and produces a mixed Java + Kotlin build.
+- Only `Specialty.java` is converted to `Specialty.kt` — the rest stays Java. Demo focuses on the build setup, not code conversion.
+
+## Running the app
 
 ```bash
 ./mvnw spring-boot:run
