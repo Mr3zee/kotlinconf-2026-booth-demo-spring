@@ -22,18 +22,18 @@ Each prompt drives the demo from the `main` branch state to a target setup. See 
 | [`kotlin-maven`](https://github.com/Mr3zee/kotlinconf-2026-booth-demo-spring/tree/kotlin-maven)                                                         | [`migrate-to-maven-with-kotlin.md`](prompts/migrate-to-maven-with-kotlin.md)      | Build migrated to **Maven + Kotlin**, with `Specialty.kt` as a sample Kotlin file.                               |
 | [`kotlin-toolchain`](https://github.com/Mr3zee/kotlinconf-2026-booth-demo-spring/tree/kotlin-toolchain)                                                 | [`migrate-to-kotlin-toolchain.md`](prompts/migrate-to-kotlin-toolchain.md)        | Build migrated to a [Kotlin Toolchain](https://kotlin-toolchain.org/latest/) setup, with `Specialty.kt`.         |
 
-## Running the app (main)
+## This branch — `rewrite-owner-mapper`
 
-Gradle:
+Result of running [`rewrite-owner-mapper.md`](prompts/rewrite-owner-mapper.md):
+
+- `OwnerMapper.java` rewritten as `OwnerMapper.kt`; original Java file removed.
+- `build.gradle.kts` gains Kotlin plugins (`jvm`, `plugin.spring`, `plugin.jpa`, `plugin.lombok`) at 2.3.21 — minimum needed to compile the single Kotlin file.
+- Everything else is untouched.
+
+## Running the app
 
 ```bash
 ./gradlew bootRun
-```
-
-Maven:
-
-```bash
-./mvnw spring-boot:run
 ```
 
 Then open http://localhost:8080/.
